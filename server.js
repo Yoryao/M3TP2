@@ -1,2 +1,7 @@
-//Recibir los datos en el servidor y armar otra página de respuesta que incluya los datos del usuario
-//y un enlace a la página de registración nuevamente.
+var http = require('http');
+
+//create a server object:
+http.createServer(function(req, res) {
+    res.write('Hello and now part 3'); //write a response to the client
+    res.end(); //end the response
+}).listen(8080); //the server object listens on port 8080
