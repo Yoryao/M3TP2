@@ -1,38 +1,40 @@
-var express = require('express');
-var app = express();
+const express = require("express");
+const app = express();
 
-app.use(express.static('public'));
-app.use(express.urlencoded());
+//const port = process.env.PORT || 3000;
 
-app.get('/myDataBase', function(req, res) {
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("user"));
 
-    var name = req.body.nombre;
-    res.send(name);
+app.get("/", (req, res) => {
+    res.send(__dirname + "/user/index.html") //con esto hago que me muestre un html donde tengo el formulario
+})
+
+app.post("/form", (req, res) => {
+
+    const nombre = req.body.nombre;
+
+    res.send(nombre);
+
+    /* json({
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.edad
+    })
+ */
 
 });
 
+app.get("*", (req, res) => {
+    res.redirect("/");
+})
 
 
-app.listen(8080, function() {
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server ???????????? iniciado en puerto 3000");
+})
 
-    console.log('esto no va a funcionar');
-
-
-});
-
-
-
-
-
-
-
-
-/* var http = require('http');
-var url = require('url');
-
-//create a server object:
-http.createServer(function(req, res) {
-    res.write('Hello and now part 3'); //write a response to the client
-    res.write('seguimos');
-    res.end(); //end the response
-}).listen(8080); //the server object listens on port 8080 */
+/*
+app.listen(port, () => {
+    console.log(`server is vfffffffflistening on port: ${port}`)
+})*/
